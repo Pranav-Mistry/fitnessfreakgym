@@ -1,0 +1,14 @@
+﻿# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs/cache/vendor (if you later add Composer)
+*.log
+cache/
+vendor/
+
+# Secrets (keep real creds outside Git)
+.env
+config.php

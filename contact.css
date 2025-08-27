@@ -1,0 +1,41 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+
+  .contact-container {
+    text-align: center;
+    margin: 50px;
+  }
+
+  .contact-person {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .contact-person:hover {
+    transform: scale(1.1);
+  }
+
+  h1 {
+    color: #219a52;
+  }
+
+  h2 {
+    color: #219a52;
+  }
+
+  p {
+    margin: 10px 0;
+    color: #555;
+  }
+
+  strong {
+    color: #333;
+  }
