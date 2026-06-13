@@ -1,10 +1,11 @@
+<?php require_once 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fitness Freak Gym</title>
+  <title><?php echo APP_NAME; ?> - Weekly Plan</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="mainpage.css">
@@ -42,26 +43,34 @@
       <div class="price__grid">
         <div class="price__card">
           <div class="price__content">
-            <h4>Weekly Plan</h4>
+            <h4>Yearly Plan</h4>
             <img src="Images/price-2.png" alt="price" />
             <p>
-              Our weekly plan is designed to provide structure and variety to
-              your workouts, ensuring you stay motivated and on track.
+              Best value! Save big with our annual membership and commit to
+              your fitness goals with full access to PRO facilities.
             </p>
             <hr />
             <h4>Key Features</h4>
-            <p>PRO Gyms</p>
+            <p>ELITE Gyms & Classes</p>
+            <p>PRO Gyms access</p>
             <p>Smart workout plan</p>
             <p>At home workouts</p>
+            <p>Nutrition guidance</p>
 			<div>
-		  <h3 style="color:red">Rs:1500/- Only</h3>
+		  <h3 style="color:red">₹15,000/- per year</h3>
+		  <p style="color:green;font-weight:bold;">💰 Save ₹3,000!</p>
 		  </div>
           </div>
-          <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right buy_now" data-amount="1280" data-id="3">Buy Now</a> 
+          <a href="javascript:void(0)" class="btn btn-sm btn-primary float-right buy_now" data-amount="15000" data-id="2">Join Now</a> 
         </div>
         
       </div>
     </section>
+
+<div style="text-align: center; margin: 30px 0;">
+    <a href="home.php" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 12px 30px;">← Back to Home</a>
+</div>
+</center>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
@@ -71,14 +80,14 @@
     var totalAmount = $(this).attr("data-amount");
     var product_id =  $(this).attr("data-id");
     var options = {
-    "key": "rzp_test_7M9lravVQLvuWg",
-    "amount": (1500*100), // 2000 paise = INR 20
-    "name": "FITNESS FREAK GYM",
+    "key": "<?php echo RAZORPAY_KEY_ID; ?>",
+    "amount": (15000*100), // Amount in paise (15000 INR = 1500000 paise)
+    "name": "<?php echo APP_NAME; ?>",
     "description": "Payment",
     "image": "ganesh1.png",
     "handler": function (response){
           $.ajax({
-            url: 'http://localhost/razorpay/payment-proccess.php',
+            url: 'payment-process.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -86,7 +95,7 @@
             }, 
             success: function (msg) {
 
-               window.location.href = 'http://localhost/razorpay/success.php';
+               window.location.href = 'success.php';
             }
         });
      

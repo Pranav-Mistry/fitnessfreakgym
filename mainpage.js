@@ -14,6 +14,40 @@ navLinks.addEventListener("click", (e) => {
   menuBtnIcon.setAttribute("class", "ri-menu-line");
 });
 
+// Wait for DOM to fully load
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scroll for all navbar anchor links
+  const navbarLinks = document.querySelectorAll('.nav__links a[href^="#"]');
+  
+  navbarLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      
+      // Skip empty or just '#'
+      if (!href || href === '#') return;
+      
+      const targetSection = document.querySelector(href);
+      
+      if (targetSection) {
+        e.preventDefault(); // Prevent default jump
+        
+        // Calculate position with offset for fixed navbar
+        const navHeight = document.querySelector('nav').offsetHeight || 70;
+        const targetTop = targetSection.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = targetTop - navHeight - 20;
+        
+        // Smooth scroll
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+        
+        console.log('Scrolling to:', href); // Debug log
+      }
+    });
+  });
+});
+
 const scrollCommonOptions = {
   distance: "50px",
   origin: "bottom",

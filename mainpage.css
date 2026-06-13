@@ -90,7 +90,8 @@ nav {
   position: fixed;
   isolation: isolate;
   width: 100%;
-  z-index: 9;
+  z-index: 999;
+  pointer-events: auto;
 }
 
 .nav__header {
@@ -100,6 +101,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   background-color: var(--secondary-color);
+  pointer-events: auto;
 }
 
 .nav__logo a {
@@ -109,6 +111,7 @@ nav {
   font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-dark);
+  pointer-events: auto;
 }
 
 .nav__logo img {
@@ -131,6 +134,7 @@ nav {
   transition: 0.5s;
   z-index: -1;
   transform: translateY(-100%);
+  pointer-events: auto;
 }
 
 .nav__links.open {
@@ -140,6 +144,8 @@ nav {
 .link a {
   color: var(--text-dark);
   transition: 0.3s;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 .link a:hover {
@@ -546,18 +552,39 @@ nav {
 @media (width > 768px) {
   nav {
     position: static;
-    padding: 2rem 1rem;
-    max-width: var(--max-width);
+    padding: 0;
+    max-width: 100%;
     margin-inline: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    display: block;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 999;
+    pointer-events: auto;
   }
 
   .nav__header {
-    padding: 0;
+    padding: 1.2rem 2rem;
+    max-width: var(--max-width);
+    margin: auto;
     background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    pointer-events: auto;
+  }
+
+  .nav__logo {
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+  }
+
+  .nav__logo a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: auto;
+    cursor: pointer;
   }
 
   .nav__menu__btn {
@@ -570,6 +597,30 @@ nav {
     flex-direction: row;
     background-color: transparent;
     transform: none;
+    gap: 2.5rem;
+    align-items: center;
+    z-index: auto;
+    pointer-events: auto;
+  }
+
+  .nav__links .link {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+  }
+
+  .nav__links .link a {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .nav__links .link a button {
+    pointer-events: auto;
+    cursor: pointer;
   }
 
   .header__container {
@@ -635,30 +686,52 @@ nav {
   }
 }
 
-.back-to-top{
-   position: fixed;
-   bottom: 2rem;
-   right: 2rem;
-   display: inline-flex;
-   align-items: center;
-   justify-content: center;
-   background-color: black;
-   border-radius: 0.5rem;
-   padding: 0.5rem;
-   text-decoration: none;
-   transition: 0.2s ease out;
+.back-to-top {
+  position: fixed;
+  bottom: 25px !important;
+  right: 25px !important;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color-dark)) !important;
+  color: white;
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50% !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.25) !important;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  padding: 0 !important;
 }
 
-.back-to-top span{
-    color: green;
-    font-size: 3rem;
+.back-to-top span {
+    color: white !important;
+    font-size: 24px !important;
     transition: 0.2s ease-out;
 }
 
 .back-to-top:hover {
-    background-color: black;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 18px rgba(0,0,0,0.35) !important;
+    background: linear-gradient(135deg, var(--primary-color-dark), var(--primary-color)) !important;
 }
 
-.back-to-top:hover span{
+.back-to-top:hover span {
     transform: translateY(-4px);
 }
+/* Logout Button Styling */
+.nav__links .link a button {
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.nav__links .link a button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+

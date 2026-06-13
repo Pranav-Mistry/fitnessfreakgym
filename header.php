@@ -5,11 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fitness Freak Gym</title>
+  
+  <!-- External CSS & Font Libraries -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
   <link rel="stylesheet" href="mainpage.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script> 
 
 <style>
 .swiper-wrapper {
@@ -34,22 +38,25 @@
   <body>
     <header class="header">
       <nav>
-      <div class="nav__header">
+        <div class="nav__header">
           <div class="nav__logo">
             <a href="#"><img src="Images/logo.jpg" alt="logo" />Fitness Freak Gym</a>
           </div>
           <div class="nav__menu__btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
           </div>
+          <ul class="nav__links" id="nav-links">
+            <li class="link"><a href="#home">Home</a></li>
+            <li class="link"><a href="#about">About</a></li>
+            <li class="link"><a href="#class">Classes</a></li>
+            <li class="link"><a href="#trainer">Trainers</a></li>
+            <li class="link"><a href="#price">Pricing</a></li>
+            <li class="link"><a href="contact.php">Contact Us</a></li>
+            <?php if(isset($_SESSION['user'])): ?>
+            <li class="link"><a href="logout.php"><button class="btn" style="background: #ff4444;">Logout</button></a></li>
+            <?php endif; ?>
+          </ul>
         </div>
-        <ul class="nav__links" id="nav-links">
-          <li class="link"><a href="#home">Home</a></li>
-          <li class="link"><a href="#about">About</a></li>
-          <li class="link"><a href="#class">Classes</a></li>
-          <li class="link"><a href="#trainer">Trainers</a></li>
-          <li class="link"><a href="#price">Pricing</a></li>
-          <a href="contact.php"><li class="link"><button class="btn">Contact Us</button></li></a>
-        </ul>
       </nav>
       <div class="section__container header__container" id="home">
         <div class="header__image">
@@ -65,7 +72,11 @@
             of!
           </p>
           <div class="header__btn">
-            <a href="signup.php"> <button class="btn">Join Today</button></a> 
+            <?php if(isset($_SESSION['user'])): ?>
+              <a href="#price"> <button class="btn">View Membership Plans</button></a>
+            <?php else: ?>
+              <a href="registration.php"> <button class="btn">Join Today</button></a>
+            <?php endif; ?>
           </div>
         </div>
       </div>

@@ -1,14 +1,35 @@
-﻿# OS/Editor
-.DS_Store
-Thumbs.db
+# Configuration file with sensitive data
+config.php
+
+# IDE and Editor files
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
-# Logs/cache/vendor (if you later add Composer)
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
 *.log
-cache/
-vendor/
+*.sql.gz
 
-# Secrets (keep real creds outside Git)
-.env
-config.php
+# Backup files
+*.bak
+*.backup
+*~
+
+# Temporary files
+tmp/
+temp/
+cache/
+
+# User uploaded files (if any)
+uploads/
+user_files/

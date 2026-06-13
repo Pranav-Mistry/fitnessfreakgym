@@ -1,6 +1,6 @@
 <?php
-ob_start(); 
- 
+ob_start();
+require_once 'config.php';
 ?>
 
 
@@ -13,58 +13,60 @@ ob_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="signup.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <title>ADVP REGISTER</title>
+  <title><?php echo APP_NAME; ?> - Login</title>
 </head>
  
 <body>
     <div class="container">
         <div class="form">
-            <h1 id="h1">ADVP LOGIN</h1>
+            <h1 id="h1"><?php echo APP_NAME; ?> LOGIN</h1>
             <div class="btn">
-			
-                <a href="registration.php" ><button class="signUpBtn" >SIGN UP</button></a>
-                
+                <a href="registration.php"><button class="signUpBtn">SIGN UP</button></a>
             </div>
 
-             <!-- SIGN UP PAGE -->
-             <form  id="form" method="post" action="">
+             <!-- LOGIN FORM -->
+             <form id="form" method="post" action="">
 			 
 			 <?php
 		if(isset($_POST['btnsubmit']))
 		{
-			$text=$_POST['username'];
-			$password=$_POST['password'];
-			if(empty($text))
+			$username = mysqli_real_escape_string(getDBConnection(), trim($_POST['username']));
+			$password = mysqli_real_escape_string(getDBConnection(), trim($_POST['password']));
+			
+			if(empty($username))
 			{
-				echo "<p style=\"color:red\">Please Enter your Username</p>";
+				echo "<p style=\"color:red;text-align:center;\">Please enter your username</p>";
 			}
 			else if(empty($password))
 			{
-				echo "<p style=\"color:red\">Please Enter your Password</p>";
+				echo "<p style=\"color:red;text-align:center;\">Please enter your password</p>";
 			}
 			else
 			{
+				$con = getDBConnection();
 				
-				$con=mysqli_connect("localhost","root","","fitnessgym");
-				$sql="select * from tbluser where username='$text' and password='$password'";
-				$result=mysqli_query($con,$sql);
-				$line = mysqli_fetch_array($result);
-				$username = $line["username"];
-				$count = mysqli_num_rows($result);
-				if($count==1)
+				// Using prepared statement to prevent SQL injection
+				$stmt = mysqli_prepare($con, "SELECT username FROM tbluser WHERE username=? AND password=?");
+				mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+				mysqli_stmt_execute($stmt);
+				$result = mysqli_stmt_get_result($stmt);
+				
+				if(mysqli_num_rows($result) == 1)
 				{
-					session_start();
-					$_SESSION['user']=$username;
-					header("Location:home.php",true);
+					$_SESSION['user'] = $username;
+					header("Location: home.php");
+					exit();
 				}
 				else
 				{
-					echo "<div style = \"color:red\">Invalid Username/Password</div>";
+					echo "<div style=\"color:red;text-align:center;\">Invalid username or password</div>";
 				}
+				
+				mysqli_stmt_close($stmt);
 				mysqli_close($con);
-				ob_end_flush();	
 			}
 		}
+		ob_end_flush();
 	?>
 			 
               <div class="formGroup">
@@ -80,7 +82,7 @@ ob_start();
                   <span class="text">I agree with term & conditions</span>
               </div>
               <div class="formGroup">
-                  <button type="submit" id="btnsubmit" name="btnsubmit" class="btn2">REGISTER</button>
+                  <button type="submit" id="btnsubmit" name="btnsubmit" class="btn2">LOGIN</button>
               </div>
           </form>
         
