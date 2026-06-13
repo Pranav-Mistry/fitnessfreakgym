@@ -83,8 +83,6 @@ fitnessfreakgym/
 
 ## Screenshots
 
-*To display your application screenshots on GitHub, save your screen captures in the `Images/` folder and link them here:*
-
 | Home Dashboard | Razorpay Checkout |
 |---|---|
 | ![Home Dashboard](Images/home_dashboard.png) | ![Razorpay Checkout](Images/razorpay_payment.png) |
